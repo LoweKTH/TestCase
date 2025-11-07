@@ -1,0 +1,46 @@
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: imr_db
+    environment:
+      POSTGRES_USER: imr
+      POSTGRES_PASSWORD: imr
+      POSTGRES_DB: imr_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U imr -d imr_db -h 127.0.0.1"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+      start_period: 5s
+
+  backend:
+    build: ./backend
+    container_name: imr_backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://imr:imr@db:5432/imr_db
+      PGSSLMODE: disable
+      PORT: 4000
+      CORS_ORIGIN: http://localhost:5173
+    ports:
+      - "4000:4000"
+    command: ["node", "dist/server.js"]
+    restart: unless-stopped   # <- så den försöker igen om något faller på första försöket
+
+  frontend:
+    build: ./frontend
+    container_name: imr_frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+
+volumes:
+  pgdata:

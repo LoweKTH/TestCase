@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# build
+dist/
+frontend/dist/
+backend/dist/
+
+# environment files
+.env
+.env.*
+!example.env
+
+# editor
+.vscode/
+.idea/
+
+# system
+.DS_Store

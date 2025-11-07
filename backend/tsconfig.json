@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    /* Output & structure */
+    "rootDir": "src",
+    "outDir": "dist",
+
+    /* Target environment (modern Node + ESM) */
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    /* Type checking & safety */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Interop and dev tools */
+    "esModuleInterop": true,
+    "sourceMap": true,
+
+    /* Exclude React (since this is backend only) */
+    "jsx": "preserve"
+  },
+  "include": ["src"]
+}
