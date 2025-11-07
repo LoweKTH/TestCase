@@ -1,4 +1,4 @@
-# 🧭 IMR Sick Leave Prototype
+# 🧭 Sick Leave Prototype
 
 
 ---
