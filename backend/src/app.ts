@@ -7,14 +7,13 @@ import { errorHandler } from "./middleware/errorHandler.js";
 export function buildApp(){
     const app = express();
 
-    // Middleware: alla requests går igenom dessa först
-    app.use(cors({ origin: config.corsOrigin })); // Tillåt CORS för frontend-appen
-    app.use(express.json()); // Parsar JSON-body
+    
+    app.use(cors({ origin: config.corsOrigin })); 
+    app.use(express.json()); 
 
-    // Api routes
+
     app.use("/api/reports", reportRouter);
 
-    // Felhantering (ska ligga sist)
     app.use(errorHandler);
 
     return app;
