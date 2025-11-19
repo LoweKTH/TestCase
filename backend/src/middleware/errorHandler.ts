@@ -1,7 +1,6 @@
 import type { ErrorRequestHandler } from 'express';
 
 export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
-    // Zod-fel -> 400
     if(err?.name === "ZodError") {
         return res.status(400).json({
             error: "Invalid payload",
