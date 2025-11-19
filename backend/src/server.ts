@@ -7,14 +7,11 @@ console.log("DEBUG DATABASE_URL =", process.env.DATABASE_URL); // <-- tillfälli
 
 (async () => {
     try{
-        // 1. Säkerställ att DB-tabeller finns
         await migrate();
         console.log("Database migrated");
 
-        // 2. Bygg express-appen
         const app = buildApp();
 
-        // 3. Starta servern
         app.listen(config.port, () => {
             console.log(`ÀPI listening on http://localhost:${config.port}`);
         });
